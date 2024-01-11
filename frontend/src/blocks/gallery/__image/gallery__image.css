@@ -1,0 +1,10 @@
+.gallery__image {
+  border-radius: 10px 10px 0px 0px;
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  cursor: pointer;
+  display: block;
+  background: grey;
+  max-height: 282px;
+}

@@ -1,0 +1,11 @@
+.popup__errors {
+  color: red;
+  font-size: 12px;
+  align-self: flex-start;
+  margin: 0;
+}
+
+.popup__errors:last-of-type {
+  margin-top: 0;
+  margin-bottom: 0;
+}

@@ -1,0 +1,19 @@
+.profile__about-yourself {
+  color: white;
+  font-size: 18px;
+  line-height: normal;
+  margin: 0;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 336px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .profile__about-yourself {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+}

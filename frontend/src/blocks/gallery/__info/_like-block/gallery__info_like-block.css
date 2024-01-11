@@ -1,0 +1,7 @@
+.gallery__info_like-block {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 22px;
+  width: 100%;
+}

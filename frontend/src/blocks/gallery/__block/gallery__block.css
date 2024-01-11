@@ -1,0 +1,15 @@
+.gallery__block {
+  background-color: white;
+  border-radius: 10px;
+  max-width: 282px;
+  height: 361px;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .gallery__block {
+    margin: 0 auto;
+  }
+}

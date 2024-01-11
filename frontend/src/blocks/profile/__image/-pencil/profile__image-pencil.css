@@ -1,0 +1,9 @@
+.profile__image-pencil {
+  background-image: url(../../../../images/pencil.svg);
+  background-color: #000;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  transition: opacity 0.8s;
+  margin-right: 30px;
+  background-size: 26px;
+}
