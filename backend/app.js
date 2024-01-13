@@ -18,6 +18,13 @@ const errorsSender = require('./errors/errorsSender');
 const { signUpScheme, signInScheme } = require('./joiSchemes');
 const NotFound = require('./errors/notFound');
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

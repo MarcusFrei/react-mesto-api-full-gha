@@ -4,6 +4,7 @@ const { secretCode } = process.env;
 const Unauthorized = require('../errors/unauthorized');
 
 const auth = (req, res, next) => {
+  console.log(2);
   const { authorization } = req.headers;
   if (!authorization) {
     next(new Unauthorized('!User is not authorized!'));

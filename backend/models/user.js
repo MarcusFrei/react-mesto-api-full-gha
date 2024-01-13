@@ -52,10 +52,12 @@ const userSchema = new mongoose.Schema(
     versionKey: false,
     statics: {
       findUser(email, password) {
+        console.log('1a');
         return this.findOne({ email }).select('+password').then((user) => {
           if (user) {
             return bcrypt.compare(password, user.password)
               .then((answer) => {
+                console.log('1b');
                 if (answer) return user;
                 return Promise.reject(new Unauthorized('User is not authorized!'));
               });

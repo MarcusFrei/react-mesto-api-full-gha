@@ -9,10 +9,11 @@ const BadRequest = require('../errors/badRequest');
 const NotFound = require('../errors/notFound');
 
 const login = (req, res, next) => {
+  console.log(1);
   const { email, password } = req.body;
   User.findUser(email, password).then((user) => {
     const userToken = jwt.sign({ id: user._id }, secretCode, { expiresIn: '7d' });
-    res.status(200).send({ token: userToken });
+    return res.status(200).send({ token: userToken });
   })
     .catch((err) => {
       next(err);
@@ -42,6 +43,7 @@ const getUserById = (req, res, next) => {
 };
 
 const getMe = (req, res, next) => {
+  console.log(req.user);
   User.findById(req.user.id)
     .then((user) => {
       if (!user) {
