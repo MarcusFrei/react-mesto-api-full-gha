@@ -4,7 +4,6 @@ import tickSuccsess from "../images/tick_success.svg";
 import crossFail from "../images/cross_fail.svg";
 //
 const InfoToolTip = ({ isOpen, onClose, isSuccess }) => {
-  console.log(isOpen);
   return (
     <section className={`popup popup_darker ${isOpen && "popup_opened"}`}>
       <div className="popup__auth-container">

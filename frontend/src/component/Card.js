@@ -6,7 +6,7 @@ function Card({ card, onCardDelete, onCardLike, onCardOpen }) {
   const user = useContext(CurrentUserContext);
 
   const hasLike = () => {
-    return likes.some((like) => like._id === user._id);
+    return likes.some((like) => like === user._id);
   };
 
   //gallery__like-button_active
@@ -20,7 +20,7 @@ function Card({ card, onCardDelete, onCardLike, onCardOpen }) {
           onCardOpen(card);
         }}
       />
-      {user._id === owner._id && (
+      {user._id === owner && (
         <button
           className="gallery__block-button-delete"
           aria-label="Кнопка удаления карточки"

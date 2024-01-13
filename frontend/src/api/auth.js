@@ -36,7 +36,6 @@ class Auth {
   };
 
   login = (email, password) => {
-    console.log(`${this._url}/signin`);
     return fetch(`${this._url}/signin`, {
       method: "POST",
       headers: {

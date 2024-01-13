@@ -41,30 +41,30 @@ function App() {
   const getData = () => {
     api
       .getUserInfo()
-      .then((data) => setCurrentUser(data))
+      .then((user) => {
+        setCurrentUser(user);
+      })
       .catch((e) => console.log(e));
     api
       .getInitialCards()
-      .then((data) => setCards(data))
+      .then(({cards}) => setCards(cards))
       .catch((e) => console.log(e));
   };
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    console.log(token);
     if (token) {
       auth
         .checkToken(token)
-        .then(({ data }) => {
+        .then((data) => {
           setIsAuth(true);
           navigate("/");
           getData();
-
           setEmail(data.email);
         })
         .catch((e) => {
-          console.log(e);
-          navigate("/sign-in")});
+          navigate("/sign-in");
+        });
     } else {
       navigate("/sign-in");
     }
@@ -83,14 +83,12 @@ function App() {
 
   function closePopupByEsape(e) {
     if (e.key === "Escape") {
-      console.log("escape");
       closeAllPopups();
     }
   }
 
   function closePopupByOverlay(e) {
     if (e.target.classList.contains("popup_opened")) {
-      console.log("over close");
       closeAllPopups();
     }
   }
@@ -125,12 +123,11 @@ function App() {
   }
 
   function updateAvatar(obj) {
-    console.log("api avatar");
     setIsLoading(true);
     api
       .updateAvatar(obj)
-      .then((data) => {
-        setCurrentUser(data);
+      .then(({user}) => {
+        setCurrentUser(user);
         closeAllPopups();
       })
       .catch((e) => console.log(e))
@@ -138,7 +135,6 @@ function App() {
   }
 
   function addCard(obj) {
-    console.log(obj);
     setIsLoading(true);
     api
       .sendNewCard(obj)
@@ -151,12 +147,11 @@ function App() {
   }
 
   function updateUserInfo(obj) {
-    console.log("api profile");
     setIsLoading(true);
     api
       .editProfile(obj)
-      .then((data) => {
-        setCurrentUser(data);
+      .then(({user}) => {
+        setCurrentUser(user);
         closeAllPopups();
       })
       .catch((e) => console.log(e))
@@ -164,12 +159,10 @@ function App() {
   }
 
   function deleteCard(id) {
-    console.log(id);
     setIsLoading(true);
     api
       .deleteCard(id)
       .then((data) => {
-        console.log(data);
         const tempCards = cards.filter((card) => card._id !== id);
         setCards(tempCards);
 
@@ -180,13 +173,11 @@ function App() {
   }
 
   function setLike(card) {
-    const isCardLiked = card.likes.some((elem) => elem._id === currentUser._id);
-
+    const isCardLiked = card.likes.some((elem) => elem === currentUser._id);
     if (!isCardLiked) {
       api
         .setLike(card._id)
         .then((data) => {
-          console.log(data);
           const tempCards = cards.map((card) =>
             card._id === data._id ? data : card
           );
@@ -197,7 +188,6 @@ function App() {
       api
         .deleteLike(card._id)
         .then((data) => {
-          console.log(data);
           const tempCards = cards.map((card) =>
             card._id === data._id ? data : card
           );
@@ -220,8 +210,6 @@ function App() {
   }
 
   const handleAuth = ({ email, password }) => {
-    console.log(email);
-    console.log(password);
     auth
       .login(email, password)
       .then((data) => {

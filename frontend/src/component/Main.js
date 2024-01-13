@@ -45,15 +45,16 @@ const Main = ({
       </section>
       <section className="gallery">
         <ul className="gallery__blocks">
-          {cards.map((card) => (
-            <Card
-              key={card._id}
-              card={card}
-              onCardDelete={onDeleteCard}
-              onCardLike={onCardLike}
-              onCardOpen={onCardOpen}
-            />
-          ))}
+          {cards.length > 0 &&
+            cards.map((card) => (
+              <Card
+                key={card._id}
+                card={card}
+                onCardDelete={onDeleteCard}
+                onCardLike={onCardLike}
+                onCardOpen={onCardOpen}
+              />
+            ))}
         </ul>
       </section>
     </main>

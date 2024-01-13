@@ -16,11 +16,6 @@ const Login = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ email, password });
-    console.log("submit");
-    // auth
-    //   .login(email, password)
-    //   .then((data) => localStorage.setItem("jwt", data.token))
-    //   .catch((e) => console.log(e));
   };
   return (
     <main className="login-page">

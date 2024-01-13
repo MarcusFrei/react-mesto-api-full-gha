@@ -10,7 +10,6 @@ const EditAvatarPopup = ({ isOpen, onClose, handleSubmit, isLoading }) => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log(values);
     handleSubmit({ avatar: inputRef.current.value });
   };
 

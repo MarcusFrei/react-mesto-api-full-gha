@@ -1,41 +1,47 @@
 require('dotenv').config();
 const express = require('express');
-
-const app = express();
-const { PORT } = process.env;
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const cors = require('cors');
 const { celebrate, errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
-const auth = require('./middlewares/auth');
-const { login, createUser } = require('./controllers/users');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-const { DB } = process.env;
+const app = express();
+const { PORT, DB } = process.env;
+
 mongoose.connect(DB);
-const router = require('./routes');
-const errorsSender = require('./errors/errorsSender');
 
-const { signUpScheme, signInScheme } = require('./joiSchemes');
-const NotFound = require('./errors/notFound');
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+app.use(
+  cors({
+    origin: 'http://localhost:3001',
+    methods: 'GET, POST, PUT, DELETE, PATCH',
+    allowedHeaders: 'Content-Type, Authorization',
+    optionsSuccessStatus: 200,
+  }),
+);
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.listen(PORT);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+const router = require('./routes');
+const auth = require('./middlewares/auth');
+const errorsSender = require('./errors/errorsSender');
+const NotFound = require('./errors/notFound');
+const { login, createUser } = require('./controllers/users');
+const { signUpScheme, signInScheme } = require('./joiSchemes');
+
 app.post('/signin', celebrate(signInScheme), login);
 app.post('/signup', celebrate(signUpScheme), createUser);
 app.use('/users', auth, router.users);
 app.use('/cards', auth, router.cards);
 
 app.use('*', auth, (req, res, next) => {
-  next(new NotFound('Such path is not exist!'));
+  next(new NotFound('Such path does not exist!'));
 });
 
 app.use(errors());

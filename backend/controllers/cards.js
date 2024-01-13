@@ -49,7 +49,7 @@ const likeCard = (req, res, next) => {
       if (card) {
         res
           .status(httpStatusCodes.OK)
-          .send({ message: 'You put like on this card!' });
+          .send(card);
       } else {
         next(new NotFound('The specified card _id doesn\'t exist!'));
       }
@@ -69,7 +69,7 @@ const dislikeCard = (req, res, next) => {
   )
     .then((card) => {
       if (card) {
-        res.status(200).send({ message: 'You delete like from this card!' });
+        res.status(200).send(card);
       } else {
         next(new NotFound('The specified card _id doesn\'t exist!'));
       }

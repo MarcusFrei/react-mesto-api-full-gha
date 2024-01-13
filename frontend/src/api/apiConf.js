@@ -1,10 +1,10 @@
 export const apiConfig = {
-  url: "http://localhost:3000",
+  url: "http://marcus-mesto.nomoredomainsmonster.ru/",
   headers: {
     "Content-Type": "application/json",
   },
 };
-export const AUTH_BASE_URL = "http://localhost:3000";
+export const AUTH_BASE_URL = "http://marcus-mesto.nomoredomainsmonster.ru/";
 
 //bebixa8462@mkurg.com
 // Qwerty1234

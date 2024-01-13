@@ -26,7 +26,6 @@ class Api {
   }
 
   editProfile(info) {
-    console.log(info);
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: {...this._headers, authorization:`Bearer ${localStorage.getItem('jwt')}`},
@@ -49,15 +48,14 @@ class Api {
   }
 
   setLike(cardId) {
-    console.log(`${this._url}/cards/likes/${cardId}`);
-    return fetch(`${this._url}/cards/likes/${cardId}`, {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: {...this._headers, authorization:`Bearer ${localStorage.getItem('jwt')}`},
     }).then((response) => this._checkResponse(response));
   }
 
   deleteLike(cardId) {
-    return fetch(`${this._url}/cards/likes/${cardId}`, {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: {...this._headers, authorization:`Bearer ${localStorage.getItem('jwt')}`},
     }).then((response) => this._checkResponse(response));
