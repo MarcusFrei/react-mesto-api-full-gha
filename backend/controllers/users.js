@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const httpStatusCodes = require('../errors/errors');
 const User = require('../models/user');
-const { secretCode } = require('../utils/index');
+
+const { secretCode } = process.env;
 const Conflict = require('../errors/conflict');
 const BadRequest = require('../errors/badRequest');
 const NotFound = require('../errors/notFound');
