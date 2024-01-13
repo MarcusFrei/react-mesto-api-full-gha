@@ -11,9 +11,8 @@ const NotFound = require('../errors/notFound');
 const login = (req, res, next) => {
   const { email, password } = req.body;
   User.findUser(email, password).then((user) => {
-    const token = jwt.sign({ id: user._id }, secretCode, { expiresIn: '7d' });
-    res.cookie('jwt', token, { maxAge: 1000 * 3600 * 24 * 7, httpOnly: true, domain: '.localhost' });
-    res.status(200).send({ id: user._id });
+    const userToken = jwt.sign({ id: user._id }, secretCode, { expiresIn: '7d' });
+    res.status(200).send({ token: userToken });
   })
     .catch((err) => {
       next(err);
