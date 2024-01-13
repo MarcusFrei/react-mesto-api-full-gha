@@ -201,7 +201,7 @@ function App() {
     auth
       .register(email, password)
       .then((data) => {
-        setEmail(data.data.email);
+        setEmail(data.email);
         setIsRegistrationSuccessful(true);
         navigate("/sign-in");
       })
