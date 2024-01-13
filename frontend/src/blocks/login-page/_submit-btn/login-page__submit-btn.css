@@ -1,0 +1,20 @@
+.login-page__submit-btn {
+  height: 50px;
+  font-size: 18px;
+  background-color: white;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: opacity 0.5s ease;
+  border: none;
+  margin-bottom: 15px;
+}
+
+.login-page_submit-btn:hover {
+  opacity: 0.85;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .login-page__submit-btn {
+    margin-bottom: 20px;
+  }
+}

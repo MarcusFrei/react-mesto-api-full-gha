@@ -1,0 +1,14 @@
+.login-page__title {
+  color: white;
+  font-size: 24px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .login-page__title {
+    padding: 0;
+    margin-bottom: 40px;
+  }
+}
