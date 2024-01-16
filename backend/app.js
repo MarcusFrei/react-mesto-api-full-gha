@@ -13,7 +13,7 @@ mongoose.connect(DB);
 
 app.use(
   cors({
-    origin: 'http://localhost:3001',
+    origin: '*',
     methods: 'GET, POST, PUT, DELETE, PATCH',
     allowedHeaders: 'Content-Type, Authorization',
     optionsSuccessStatus: 200,
