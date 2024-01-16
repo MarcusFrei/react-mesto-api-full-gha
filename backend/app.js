@@ -35,6 +35,12 @@ const NotFound = require('./errors/notFound');
 const { login, createUser } = require('./controllers/users');
 const { signUpScheme, signInScheme } = require('./joiSchemes');
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post('/signin', celebrate(signInScheme), login);
 app.post('/signup', celebrate(signUpScheme), createUser);
 app.use('/users', auth, router.users);
