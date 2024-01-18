@@ -1,4 +1,3 @@
-const httpStatusCodes = require('../errors/errors');
 const Card = require('../models/card');
 const NotFound = require('../errors/notFound');
 const BadRequest = require('../errors/badRequest');
@@ -16,7 +15,7 @@ const createCard = (req, res, next) => {
   const { name, link } = req.body;
   const owner = req.user.id;
   Card.create({ name, link, owner })
-    .then((card) => res.status(httpStatusCodes.CREATED).send(card))
+    .then((card) => res.status(201).send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequest('Get invalid data for card creation!'));
@@ -33,7 +32,7 @@ const deleteCard = (req, res, next) => {
       }
       return next(new Forbidden('This card can\'t be deleted!'));
     })
-    .then((card) => res.status(httpStatusCodes.CREATED).send(card))
+    .then((card) => res.status(201).send(card))
     .catch((err) => {
       if (err.name === 'NotFound') { next(new NotFound('Card with current _id can\'t be found!')); } else if (err.name === 'ValidationError' || err.name === 'BadRequest') { next(new BadRequest(err.message)); } else next(err);
     });
@@ -48,7 +47,7 @@ const likeCard = (req, res, next) => {
     .then((card) => {
       if (card) {
         res
-          .status(httpStatusCodes.OK)
+          .status(200)
           .send(card);
       } else {
         next(new NotFound('The specified card _id doesn\'t exist!'));
